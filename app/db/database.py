@@ -49,7 +49,7 @@ try:
         password=DB_CONFIG["password"],
     )
 
-    mycursor = mydb.cursor()
+    mycursor = mydb.cursor(dictionary=True)
 
     def create_user_table():
         try:

@@ -48,13 +48,16 @@ async def register_user(user: UserRegistration, mycursor, mydb):
             "status": status.HTTP_201_CREATED,
         }
 
+    except HTTPException as http_error:
+        raise http_error  
     except Exception as e:
+        print("error ", e)
         raise HTTPException(status_code=500, detail="Internal Server Error")
-
 
 # Logic for logging in the user
 async def login_user(user: UserLogin, mycursor, mydb):
     try:
+        mycursor = mydb.cursor(dictionary=True)
         if not user.username_email or not user.password:
             raise HTTPException(
                 status_code=400, detail="Username/Email or Password not provided"
@@ -63,20 +66,21 @@ async def login_user(user: UserLogin, mycursor, mydb):
         is_email = "@" in user.username_email
         if is_email:
             mycursor.execute(
-                "SELECT * FROM users WHERE email = %s", (user.username_email,)
+                "SELECT id as id, username as username, email as email, password as password FROM users  WHERE email = %s", (user.username_email,)
             )
         else:
             mycursor.execute(
-                "SELECT * FROM users WHERE username = %s", (user.username_email,)
+                "SELECT id as id, username as username, email as email, password as password FROM users  WHERE username = %s", (user.username_email,)
             )
+        # fetching user from database if it exists
         db_user = mycursor.fetchone()
-
+        # verifying the hashed password
         if db_user:
-            hashed_password = db_user[3]
+            hashed_password = db_user["password"]
             user_details = {
-                "id": db_user[0],
-                "username": db_user[1],
-                "email": db_user[2],
+                "id": db_user["id"],
+                "username": db_user["username"],
+                "email": db_user["email"],
             }
             if pwd_context.verify(user.password, hashed_password):
                 return {
@@ -89,5 +93,8 @@ async def login_user(user: UserLogin, mycursor, mydb):
                 raise HTTPException(status_code=401, detail="Invalid password")
         else:
             raise HTTPException(status_code=401, detail="User not found")
+    except HTTPException as http_error:
+        raise http_error  
     except Exception as e:
+        print("error ", e)
         raise HTTPException(status_code=500, detail="Internal Server Error")
