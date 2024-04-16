@@ -4,7 +4,7 @@ This project implements a simple User Registration API using FastAPI and MySQL.
 
 ## Setting up the SQL Server
 
-1. **Install MySQL Server**: Install MySQL Server on your machine if you haven't already. You can download it from [here](https://dev.mysql.com/downloads/).
+1. **Install MySQL Server**: Install MySQL Server on your machine if you haven't already. You can download it from [here](https://dev.mysql.com/downloads/installer/).
 
 2. **Create Database**: You need to create a MySQL database for the application. You can do this using a MySQL client like MySQL Workbench or through command line:
 
