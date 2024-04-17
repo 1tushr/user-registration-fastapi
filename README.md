@@ -6,7 +6,7 @@ This project implements a simple User Registration API using FastAPI and MySQL.
 
 1. **Install MySQL Server**: Install MySQL Server on your machine if you haven't already. You can download it from [here](https://dev.mysql.com/downloads/installer/).
 
-2. **Create Database**: You need to create a MySQL database for the application. You can do this using a MySQL client like MySQL Workbench or through command line:
+2. **Create Database**: We need to create a MySQL database for the application. This can be done using a MySQL client like MySQL Workbench or through command line:
 
     ```sql
     CREATE DATABASE users;
@@ -24,9 +24,11 @@ This project implements a simple User Registration API using FastAPI and MySQL.
     }
     ```
 
+## Project is built using Python version  ```3.12.1``` 
+
 ## Installing Dependencies
 
-1. **Create Virtual Environment**: It's a good practice to use a virtual environment for Python projects. You can create one using `venv`:
+1. **Create Virtual Environment**: We need a virtual environment for the  project. It can be created using `venv`:
 
     ```bash
     python -m venv venv
@@ -58,7 +60,7 @@ This project implements a simple User Registration API using FastAPI and MySQL.
     uvicorn main:app --reload
     ```
 
-2. **Access API Documentation**: Once the server is running, you can access the API documentation at `http://127.0.0.1:8000/docs`.
+2. **Access API Documentation**: Once the server is running, we can access the API documentation at `http://127.0.0.1:8000/docs`.
 
 ## API Endpoints
 
